@@ -32,7 +32,7 @@ class PartnerController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'logo_url' => 'nullable|string|max:255',
+            'logo_url' => 'nullable|string',
         ]);
 
         Partner::create($validated);
@@ -55,7 +55,7 @@ class PartnerController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'logo_url' => 'nullable|string|max:255',
+            'logo_url' => 'nullable|string',
         ]);
 
         $partner->update($validated);

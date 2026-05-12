@@ -83,34 +83,3 @@
 
 </div>
 @endsection
-
-                            <i class="fa-solid fa-pen-to-square w-4 h-4"></i>
-                        </button>
-                        <button class="px-3 py-2 bg-red-100 text-red-600 rounded-lg font-bold text-sm hover:bg-red-200 transition">
-                            <i class="fa-solid fa-trash w-4 h-4"></i>
-                        </button>
-                    </td>
-                </tr>
-
-                <tr class="hover:bg-slate-50 transition">
-                    <td class="px-8 py-6 font-bold text-indigo-600">3</td>
-                    <td class="px-8 py-6">
-                        <p class="font-bold">Olahraga</p>
-                    </td>
-                    <td class="px-8 py-6">
-                        <span class="text-slate-600 font-medium">5 event</span>
-                    </td>
-                    <td class="px-8 py-6 flex gap-2">
-                        <button class="px-3 py-2 bg-blue-100 text-blue-600 rounded-lg font-bold text-sm hover:bg-blue-200 transition">
-                            <i class="fa-solid fa-pen-to-square w-4 h-4"></i>
-                        </button>
-                        <button class="px-3 py-2 bg-red-100 text-red-600 rounded-lg font-bold text-sm hover:bg-red-200 transition">
-                            <i class="fa-solid fa-trash w-4 h-4"></i>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-@endsection
