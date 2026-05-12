@@ -39,4 +39,37 @@ class PartnerController extends Controller
 
         return redirect()->route('admin.partners.index')->with('success', 'Partner berhasil ditambahkan!');
     }
+
+    /**
+     * Show the form for editing the specified partner.
+     */
+    public function edit(Partner $partner)
+    {
+        return view('admin.partners.edit', compact('partner'));
+    }
+
+    /**
+     * Update the specified partner in storage.
+     */
+    public function update(Request $request, Partner $partner)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'logo_url' => 'nullable|string|max:255',
+        ]);
+
+        $partner->update($validated);
+
+        return redirect()->route('admin.partners.index')->with('success', 'Partner berhasil diperbarui!');
+    }
+
+    /**
+     * Remove the specified partner from storage.
+     */
+    public function destroy(Partner $partner)
+    {
+        $partner->delete();
+
+        return redirect()->route('admin.partners.index')->with('success', 'Partner berhasil dihapus!');
+    }
 }
