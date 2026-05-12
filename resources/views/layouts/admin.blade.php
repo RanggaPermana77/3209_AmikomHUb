@@ -61,6 +61,13 @@
                 <i class="fa-solid fa-tag w-5 h-5"></i>
                 Kategori
             </a>
+
+            <!-- PARTNER -->
+            <a href="/admin/partners"
+                class="flex items-center gap-3 px-4 py-3 hover:bg-indigo-800 rounded-xl font-bold">
+                <i class="fa-solid fa-handshake w-5 h-5"></i>
+                Kelola Partner
+            </a>
         </nav>
 
         <!-- Logout -->
