@@ -1,63 +1,89 @@
 @extends('layouts.admin')
 
 @section('content')
-<header class="flex justify-between items-center mb-10">
-    <div>
-        <h1 class="text-3xl font-black">Kelola Kategori</h1>
-        <p class="text-slate-500 font-medium">Tambah dan atur kategori event di sini.</p>
-    </div>
-    <button
-        class="px-6 py-3 bg-indigo-600 text-white rounded-2xl font-bold shadow-lg shadow-indigo-100 hover:bg-indigo-700 active:scale-95 transition flex items-center gap-2">
-        <i class="fa-solid fa-plus w-5 h-5"></i>
-        Tambah Kategori
-    </button>
-</header>
+<div class="p-6">
 
-<div class="bg-white rounded-[2.5rem] border border-slate-200 shadow-lg overflow-hidden">
-    <div class="px-8 py-6 bg-gradient-to-r from-indigo-50 to-indigo-100 border-b border-indigo-200 flex gap-4">
-        <input type="text" placeholder="Cari kategori..."
-            class="flex-1 px-5 py-3 rounded-xl border-slate-200 border bg-white focus:ring-2 focus:ring-indigo-500 outline-none transition">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold">Manajemen Kategori</h2>
+        <a href="{{ route('admin.categories.create') }}"
+           class="bg-indigo-600 text-white px-4 py-2 rounded font-semibold hover:bg-indigo-700">
+            Tambah Kategori
+        </a>
     </div>
+
+    @if(session('success'))
+        <div class="bg-green-100 text-green-700 p-4 rounded mb-5 border border-green-200">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if(session('error'))
+        <div class="bg-red-100 text-red-700 p-4 rounded mb-5 border border-red-200">
+            {{ session('error') }}
+        </div>
+    @endif
 
     <div class="overflow-x-auto">
-        <table class="w-full text-left border-collapse">
-            <thead class="bg-gradient-to-r from-indigo-600 to-indigo-700 text-white uppercase text-[10px] font-black tracking-widest">
-                <tr>
-                    <th class="px-8 py-4 w-16">No</th>
-                    <th class="px-8 py-4">Nama Kategori</th>
-                    <th class="px-8 py-4">Jumlah Event</th>
-                    <th class="px-8 py-4">Aksi</th>
+        <table class="w-full bg-white rounded-lg shadow-sm border border-gray-200 text-left">
+            
+            <thead>
+                <tr class="bg-gray-50 border-b border-gray-200">
+                    <th class="p-4 font-semibold text-gray-600">Nama Kategori</th>
+                    <th class="p-4 font-semibold text-gray-600">Slug</th>
+                    <th class="p-4 font-semibold text-gray-600">Jumlah Event</th>
+                    <th class="p-4 font-semibold text-gray-600">Aksi Pilihan</th>
                 </tr>
             </thead>
+
             <tbody>
-                <tr class="hover:bg-slate-50 transition">
-                    <td class="px-8 py-6 font-bold text-indigo-600">1</td>
-                    <td class="px-8 py-6">
-                        <p class="font-bold">Musik</p>
+                @forelse($categories as $category)
+                <tr class="border-b border-gray-100 hover:bg-gray-50">
+                    <td class="p-4 text-gray-800 font-medium">
+                        {{ $category->name }}
                     </td>
-                    <td class="px-8 py-6">
-                        <span class="text-slate-600 font-medium">12 event</span>
+
+                    <td class="p-4 text-gray-600">
+                        {{ $category->slug }}
                     </td>
-                    <td class="px-8 py-6 flex gap-2">
-                        <button class="px-3 py-2 bg-blue-100 text-blue-600 rounded-lg font-bold text-sm hover:bg-blue-200 transition">
-                            <i class="fa-solid fa-pen-to-square w-4 h-4"></i>
-                        </button>
-                        <button class="px-3 py-2 bg-red-100 text-red-600 rounded-lg font-bold text-sm hover:bg-red-200 transition">
-                            <i class="fa-solid fa-trash w-4 h-4"></i>
-                        </button>
+
+                    <td class="p-4">
+                        <span class="bg-indigo-100 text-indigo-600 px-3 py-1 rounded text-sm font-semibold">
+                            {{ $category->events_count }} event
+                        </span>
+                    </td>
+
+                    <td class="p-4 flex gap-2">
+                        <a href="{{ route('admin.categories.edit', $category->id) }}"
+                           class="bg-blue-50 text-blue-600 border border-blue-200 px-3 py-1.5 rounded text-sm font-semibold hover:bg-blue-600 hover:text-white transition">
+                            Edit
+                        </a>
+                        <form action="{{ route('admin.categories.destroy', $category->id) }}"
+                              method="POST"
+                              onsubmit="return confirm('Anda yakin ingin menghapus kategori ini?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                    class="bg-red-100 text-red-600 border border-red-200 px-3 py-1.5 rounded text-sm font-semibold hover:bg-red-600 hover:text-white transition">
+                                Hapus
+                            </button>
+                        </form>
                     </td>
                 </tr>
+                @empty
+                <tr>
+                    <td colspan="4" class="p-4 text-center text-gray-500">
+                        Belum ada kategori. <a href="{{ route('admin.categories.create') }}" class="text-indigo-600 font-semibold">Tambah kategori sekarang</a>
+                    </td>
+                </tr>
+                @endforelse
+            </tbody>
 
-                <tr class="hover:bg-slate-50 transition">
-                    <td class="px-8 py-6 font-bold text-indigo-600">2</td>
-                    <td class="px-8 py-6">
-                        <p class="font-bold">Workshop</p>
-                    </td>
-                    <td class="px-8 py-6">
-                        <span class="text-slate-600 font-medium">8 event</span>
-                    </td>
-                    <td class="px-8 py-6 flex gap-2">
-                        <button class="px-3 py-2 bg-blue-100 text-blue-600 rounded-lg font-bold text-sm hover:bg-blue-200 transition">
+        </table>
+    </div>
+
+</div>
+@endsection
+
                             <i class="fa-solid fa-pen-to-square w-4 h-4"></i>
                         </button>
                         <button class="px-3 py-2 bg-red-100 text-red-600 rounded-lg font-bold text-sm hover:bg-red-200 transition">
