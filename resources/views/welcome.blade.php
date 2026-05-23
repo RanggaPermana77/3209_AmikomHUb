@@ -103,4 +103,33 @@
             @endforeach
         </div>
     </section>
+
+    <!-- Partners Section -->
+    <section class="max-w-7xl mx-auto px-6 py-20">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-extrabold mb-2">Mitra Terpercaya</h2>
+            <p class="text-slate-500 font-medium">Bergabunglah dengan berbagai mitra yang sudah bekerja sama dengan AmikomEventHub</p>
+        </div>
+
+        <!-- Partners Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            @forelse($partners as $partner)
+            <div class="bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg transition-all duration-300 p-8 flex flex-col items-center text-center">
+                @if($partner->logo_url)
+                    <img src="{{ $partner->logo_url }}" alt="{{ $partner->name }}" 
+                         class="w-32 h-32 object-contain mb-4">
+                @else
+                    <div class="w-32 h-32 bg-gray-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa-solid fa-building text-gray-400 text-4xl"></i>
+                    </div>
+                @endif
+                <h3 class="text-xl font-bold text-gray-800">{{ $partner->name }}</h3>
+            </div>
+            @empty
+            <div class="col-span-full text-center py-12">
+                <p class="text-gray-500 font-medium">Belum ada mitra yang terdaftar</p>
+            </div>
+            @endforelse
+        </div>
+    </section>
 @endsection

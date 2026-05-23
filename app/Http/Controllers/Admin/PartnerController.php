@@ -11,9 +11,16 @@ class PartnerController extends Controller
     /**
      * Display a listing of the partners.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $partners = Partner::all();
+        $query = Partner::query();
+
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where('name', 'LIKE', '%' . $search . '%');
+        }
+
+        $partners = $query->get();
         return view('admin.partners.index', compact('partners'));
     }
 

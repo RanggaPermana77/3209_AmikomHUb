@@ -46,18 +46,53 @@
     @yield('content')
 
     <!-- Footer -->
-    <footer class="bg-indigo-900 text-indigo-100 py-20 px-6 mt-20">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
-            <div class="space-y-4 col-span-2">
-                <div class="flex items-center gap-2">
-                    <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-indigo-900 font-bold text-xl">
-                        AH
+    <footer class="bg-indigo-950 text-indigo-100 py-16 px-6 mt-20">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-16 mb-12 pb-12 border-b border-indigo-800">
+                <!-- Left Column: Logo & Description -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2">
+                        <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-indigo-900 font-bold text-lg">
+                            AH
+                        </div>
+                        <span class="text-xl font-bold text-white">AmikomEventHub</span>
                     </div>
-                    <span class="text-2xl font-bold text-white">AmikomEventHub</span>
+                    <p class="text-indigo-300 text-sm leading-relaxed max-w-xs">
+                        Platform reservasi tiket event online terbaik untuk mahasiswa dan penyelenggara profesional.
+                    </p>
                 </div>
-                <p class="max-w-xs text-indigo-300">
-                    Platform reservasi tiket event online terbaik.
-                </p>
+
+                <!-- Middle Column: Navigasi -->
+                <div class="space-y-4">
+                    <h3 class="text-white font-semibold text-lg">Navigasi</h3>
+                    <ul class="space-y-2 text-indigo-300">
+                        <li><a href="{{ route('home') }}" class="hover:text-white transition duration-200">Home</a></li>
+                        <li><a href="{{ route('home') }}#events" class="hover:text-white transition duration-200">Semua Event</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-200">Cara Bayar</a></li>
+                    </ul>
+                </div>
+
+                <!-- Right Column: Hubungi Kami -->
+                <div class="space-y-4">
+                    <h3 class="text-white font-semibold text-lg">Hubungi Kami</h3>
+                    <ul class="space-y-2 text-indigo-300 text-sm">
+                        <li>
+                            <a href="mailto:support@eventtiket.com" class="hover:text-white transition duration-200">
+                                support@eventtiket.com
+                            </a>
+                        </li>
+                        <li>
+                            <a href="tel:+6281234567890" class="hover:text-white transition duration-200">
+                                +62 812 3456 7890
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Footer Bottom: Copyright -->
+            <div class="text-center text-indigo-400 text-sm">
+                <p>© 2024 AmikomEventHub. Built with Laravel & Tailwind CSS.</p>
             </div>
         </div>
     </footer>

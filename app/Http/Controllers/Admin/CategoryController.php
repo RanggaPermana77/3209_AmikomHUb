@@ -11,9 +11,17 @@ class CategoryController extends Controller
     /**
      * Display a listing of the categories.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::withCount('events')->get();
+        $query = Category::withCount('events');
+
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where('name', 'LIKE', '%' . $search . '%')
+                  ->orWhere('slug', 'LIKE', '%' . $search . '%');
+        }
+
+        $categories = $query->get();
         return view('admin.categories.index', compact('categories'));
     }
 
