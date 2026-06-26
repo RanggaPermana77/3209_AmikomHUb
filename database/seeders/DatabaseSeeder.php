@@ -147,5 +147,8 @@ class DatabaseSeeder extends Seeder
             'stock' => 100,
             'poster_path' => 'posters/event-13.png',
         ]);
+
+        // Seed Partner data
+        $this->call(PartnerSeeder::class);
     }
 }

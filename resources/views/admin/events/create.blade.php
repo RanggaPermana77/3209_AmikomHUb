@@ -8,14 +8,18 @@
     </h2>
 
     <form action="{{ route('admin.events.store') }}" method="POST"
+          enctype="multipart/form-data"
           class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 mt-2">
         @csrf
 
         <div class="mb-4">
             <label class="block mb-2 font-medium text-gray-700">Judul Event</label>
-            <input type="text" name="title"
+            <input type="text" name="title" value="{{ old('title') }}"
                    class="w-full border border-gray-300 p-2.5 rounded focus:ring focus:ring-indigo-200"
                    required>
+            @error('title')
+                <span class="text-red-600 text-sm mt-1 block">{{ $message }}</span>
+            @enderror
         </div>
 
         <div class="mb-4">
@@ -24,48 +28,74 @@
                     class="w-full border border-gray-300 p-2.5 rounded focus:ring focus:ring-indigo-200"
                     required>
                 @foreach($categories as $category)
-                    <option value="{{ $category->id }}">
+                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
                         {{ $category->name }}
                     </option>
                 @endforeach
             </select>
+            @error('category_id')
+                <span class="text-red-600 text-sm mt-1 block">{{ $message }}</span>
+            @enderror
         </div>
 
         <div class="mb-4">
             <label class="block mb-2 font-medium text-gray-700">Deskripsi Pendek</label>
             <textarea name="description"
                       class="w-full border border-gray-300 p-2.5 rounded focus:ring focus:ring-indigo-200"
-                      rows="3" required></textarea>
+                      rows="3" required>{{ old('description') }}</textarea>
+            @error('description')
+                <span class="text-red-600 text-sm mt-1 block">{{ $message }}</span>
+            @enderror
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-4">
             <div>
                 <label class="block mb-2 font-medium text-gray-700">Tanggal & Waktu</label>
-                <input type="datetime-local" name="date"
+                <input type="datetime-local" name="date" value="{{ old('date') }}"
                        class="w-full border border-gray-300 p-2.5 rounded"
                        required>
+                @error('date')
+                    <span class="text-red-600 text-sm mt-1 block">{{ $message }}</span>
+                @enderror
             </div>
 
             <div>
                 <label class="block mb-2 font-medium text-gray-700">Harga Tiket (Rp)</label>
-                <input type="number" name="price"
+                <input type="number" name="price" value="{{ old('price') }}"
                        class="w-full border border-gray-300 p-2.5 rounded"
                        required>
+                @error('price')
+                    <span class="text-red-600 text-sm mt-1 block">{{ $message }}</span>
+                @enderror
             </div>
 
             <div>
                 <label class="block mb-2 font-medium text-gray-700">Kapasitas Stok</label>
-                <input type="number" name="stock"
+                <input type="number" name="stock" value="{{ old('stock') }}"
                        class="w-full border border-gray-300 p-2.5 rounded"
                        required>
+                @error('stock')
+                    <span class="text-red-600 text-sm mt-1 block">{{ $message }}</span>
+                @enderror
             </div>
         </div>
 
         <div class="mb-6">
             <label class="block mb-2 font-medium text-gray-700">Lokasi / Gedung</label>
-            <input type="text" name="location"
+            <input type="text" name="location" value="{{ old('location') }}"
                    class="w-full border border-gray-300 p-2.5 rounded"
                    required>
+            @error('location')
+                <span class="text-red-600 text-sm mt-1 block">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <div class="mb-6">
+            <label class="block mb-2 font-medium text-gray-700">Poster Event (Opsional)</label>
+            <input type="file" name="poster" accept="image/*" class="w-full border border-gray-300 p-2.5 rounded">
+            @error('poster')
+                <span class="text-red-600 text-sm mt-1 block">{{ $message }}</span>
+            @enderror
         </div>
 
         <div class="flex justify-end border-t pt-4">

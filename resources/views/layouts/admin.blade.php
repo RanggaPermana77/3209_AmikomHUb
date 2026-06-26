@@ -72,11 +72,13 @@
 
         <!-- Logout -->
         <div class="pt-6 border-t border-indigo-800">
-            <a href="/"
-                class="flex items-center gap-3 px-4 py-3 text-indigo-300 hover:text-white font-medium">
-                <i class="fa-solid fa-arrow-right-from-bracket w-5 h-5"></i>
-                Keluar
-            </a>
+            <form action="{{ route('admin.logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="w-full text-left flex items-center gap-3 px-4 py-3 text-indigo-300 hover:text-white font-medium hover:bg-indigo-800 rounded-xl transition">
+                    <i class="fa-solid fa-arrow-right-from-bracket w-5 h-5"></i>
+                    Keluar
+                </button>
+            </form>
         </div>
 
     </aside>
@@ -87,8 +89,8 @@
         <!-- Header -->
         <header class="flex justify-between items-center mb-10">
             <div>
-                <h1 class="text-3xl font-black">Admin Panel</h1>
-                <p class="text-slate-500 font-medium">Selamat datang kembali, Admin!</p>
+                <h1 class="text-3xl font-black">@yield('page_title', 'Admin Panel')</h1>
+                <p class="text-slate-500 font-medium">@yield('page_subtitle', 'Selamat datang kembali, Admin!')</p>
             </div>
         </header>
 
